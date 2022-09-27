@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuessWhoGenerator", "GuessWhoGenerator.csproj", "{2B663863-565C-490F-8783-0ACBD236BFDE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2B663863-565C-490F-8783-0ACBD236BFDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B663863-565C-490F-8783-0ACBD236BFDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B663863-565C-490F-8783-0ACBD236BFDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B663863-565C-490F-8783-0ACBD236BFDE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {55610967-30FA-44D4-B143-D19D77B1F16E}
+	EndGlobalSection
+EndGlobal
