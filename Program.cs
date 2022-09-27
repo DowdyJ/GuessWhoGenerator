@@ -1,12 +1,13 @@
-﻿
+﻿using GuessWhoGenerator.ImageGetter;
 
-namespace GuessWhoGenerator 
+
+namespace GuessWhoGenerator
 {
     public class Program 
     {
         public async static Task Main(string[] args) 
         {
-            IImageGetter imageGetter = new ThisPersonDoesNotExistImageGetter();
+            IImageGetter imageGetter = new PicrewImageGetter();
 
             await imageGetter.GetImages(10);
 
