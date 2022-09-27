@@ -9,6 +9,6 @@ namespace GuessWhoGenerator
 {
     public interface IImageGetter
     {
-        public Task<List<Image>?> GetImages();
+        public Task GetImages(int numberOfImages);
     }
 }
