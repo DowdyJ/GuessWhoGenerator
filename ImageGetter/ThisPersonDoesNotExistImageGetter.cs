@@ -11,14 +11,14 @@ namespace GuessWhoGenerator.ImageGetter
 {
     internal class ThisPersonDoesNotExistImageGetter : IImageGetter
     {
-        public async Task GetImages(int numberOfImages)
+        public async Task GetImages(string outDir, int numberOfImages)
         {
             List<Task> makeImagesTasks = new List<Task>();
 
             for (int i = 0; i < numberOfImages; ++i)
             {
                 await Task.Delay(2000);
-                makeImagesTasks.Add(CreateSingleImage($"TEST{i}"));
+                makeImagesTasks.Add(CreateSingleImage(outDir, $"{i}"));
             }
 
             await Task.WhenAll(makeImagesTasks);
@@ -27,7 +27,7 @@ namespace GuessWhoGenerator.ImageGetter
         }
 
 
-        private async Task CreateSingleImage(string fileName)
+        private async Task CreateSingleImage(string outdir, string fileName)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -36,16 +36,15 @@ namespace GuessWhoGenerator.ImageGetter
                 client.MaxResponseContentBufferSize = 256000000;
                 client.DefaultRequestHeaders.ConnectionClose = true;
                 client.DefaultRequestHeaders.UserAgent.ParseAdd($"Mozilla/5.0 (compatible; {fileName}/1.0)");
-                string outDir = @$"{Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)}\downloadedPictures\";
                 string requestUrl = @"https://thispersondoesnotexist.com/image";
 
-                Directory.CreateDirectory(outDir);
+                Directory.CreateDirectory(outdir);
 
                 try
                 {
                     using (Stream streamFromServer = await client.GetStreamAsync(requestUrl))
                     {
-                        using (FileStream fs = new FileStream(outDir + $"{fileName}.jpg", FileMode.Create, FileAccess.Write))
+                        using (FileStream fs = new FileStream(outdir + $"{fileName}.jpg", FileMode.Create, FileAccess.Write))
                         {
                             streamFromServer.CopyTo(fs);
                         }

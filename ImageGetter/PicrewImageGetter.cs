@@ -10,15 +10,24 @@ namespace GuessWhoGenerator.ImageGetter
 {
     public class PicrewImageGetter : IImageGetter
     {
-        public async Task GetImages(int numberOfImages)
+        private string _picrewUrl;
+
+        public PicrewImageGetter(string picrewUrl) 
         {
-            await GetRandomPicrewImages(@"https://picrew.me/image_maker/516657", numberOfImages, false, true);
+            this._picrewUrl = picrewUrl;
+        }
+
+        public async Task GetImages(string saveToPath, int numberOfImages)
+        {
+            await GetRandomPicrewImages(saveToPath, _picrewUrl, numberOfImages, true, false);
             return;
         }
 
 
-        private async Task GetRandomPicrewImages(string picrewUrl, int numberOfImages, bool randomizeAll = true, bool randomizeItems = false) 
+        private async Task GetRandomPicrewImages(string saveToPath, string picrewUrl, int numberOfImages, bool randomizeAll = true, bool randomizeItems = false) 
         {
+            Directory.CreateDirectory(saveToPath);
+
             using BrowserFetcher browserFetcher = new BrowserFetcher();
             await browserFetcher.DownloadAsync(BrowserFetcher.DefaultChromiumRevision);
             var browser = await Puppeteer.LaunchAsync(new LaunchOptions
@@ -48,8 +57,7 @@ namespace GuessWhoGenerator.ImageGetter
                     base64Image = base64Image.Substring(base64Image.IndexOf("base64,") + 7);
 
                     byte[] imageAsBytes = Convert.FromBase64String(base64Image);
-                    string outDir = @$"{Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)}\downloadedPictures\";
-                    File.WriteAllBytes(outDir + $"{i}.png", imageAsBytes);
+                    File.WriteAllBytes(saveToPath + $"{i}.png", imageAsBytes);
                 }
 
             }
