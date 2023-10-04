@@ -8,7 +8,7 @@ namespace GuessWhoGenerator
     {
         public async static Task Main(string[] args)
         {
-            IImageGetter imageGetter = new PicrewImageGetter(@"https://picrew.me/en/image_maker/2151243");
+            IImageGetter imageGetter = new PicrewImageGetter(args[0]);
             IBoardMaker boardMaker = new StandardBoardMaker();
 
             string outDir = @$"{Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)}/downloadedPictures/";
